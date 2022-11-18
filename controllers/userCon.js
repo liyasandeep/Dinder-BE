@@ -28,7 +28,6 @@ exports.getIndividualUserByUsername = (req, res, next) => {
 exports.patchUserByUsername = (req, res, next) => {
   const { username } = req.params;
   const { preferences, postcode, password } = req.body;
-  console.log(typeof postcode);
   updateUserByUsername(username, preferences, postcode, password)
     .then((updatedUser) => {
       res.status(200).send(updatedUser);
