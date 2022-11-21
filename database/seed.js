@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
 const restaurantSchema = new mongoose.Schema({
   name: {
@@ -23,13 +23,13 @@ const restaurantSchema = new mongoose.Schema({
   location: {
     type: {
       type: String,
-      enum: ['Point'],
-      },
+      enum: ["Point"],
+    },
     coordinates: {
       type: [Number],
-      required: true
-      }
-        },
+      required: true,
+    },
+  },
   geoLong: {
     type: Number,
     required: true,
@@ -45,11 +45,11 @@ const restaurantSchema = new mongoose.Schema({
 });
 
 const preferenceSchema = new mongoose.Schema({
-  preference:{
+  preference: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
 const usersSchema = new mongoose.Schema({
   username: {
@@ -64,18 +64,17 @@ const usersSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  preferences:  {
-    type: [{type: String}],
+  preferences: {
+    type: [{ type: String }],
     required: false,
   },
 });
 
-
-usersSchema.pre('save', async function(next) {
+usersSchema.pre("save", async function (next) {
   try {
     // check method of registration
     const user = this;
-    if (!user.isModified('password')) next();
+    if (!user.isModified("password")) next();
     // generate salt
     const salt = await bcrypt.genSalt(10);
     // hash the password
@@ -88,19 +87,15 @@ usersSchema.pre('save', async function(next) {
   }
 });
 
-
-
 usersSchema.methods.matchPassword = async function (password) {
- try {
-   return await bcrypt.compare(password, this.password);
- } catch (error) {
-   throw new Error(error);
- }
+  try {
+    return await bcrypt.compare(password, this.password);
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
-
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
-
 
 const Users = mongoose.model("Users", usersSchema);
 const Preferences = mongoose.model("Preferences", preferenceSchema);

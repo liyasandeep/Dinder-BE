@@ -32,7 +32,7 @@ const connectDB = async () => {
 // connectDB();
 //
 // const mongoString = process.env.DATABASE_URL;
-// console.log(mongoString)
+// console.log(mongoString);
 
 // async function connect() {
 //   try {
