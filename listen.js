@@ -1,7 +1,13 @@
-const app = require("./app")
+const app = require("./app");
+const PORT = process.env.PORT || 3000
+const connectDB = require("./database/connection")
 
 
-app.listen(9090, () => {
-    console.log("Connected to port 9090");
-  });
-  
+connectDB().then(() => {
+  app.listen(PORT, () => {
+      console.log("listening for requests");
+  })
+})
+// app.listen(PORT, () => {
+//   console.log(`Listening on ${PORT}...`);
+// });

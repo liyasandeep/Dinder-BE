@@ -263,6 +263,23 @@ describe("PATCH /api/users/:username", () => {
         expect(body[0].preferences).toEqual(["English"]);
       });
   });
+  test("200: returns updated user information, editing other details", () => {
+    return request(app)
+      .patch("/api/users/Sol")
+      .send({
+        preferences: ["English"],
+        password: "MyPassword01",
+        postcode: "M7 9EQ",
+      })
+      .expect(200)
+      .then(({ body }) => {
+        expect(body).toHaveLength(1);
+        expect(Array.isArray(body)).toBe(true);
+        expect(body[0].postcode).toEqual("M7 9EQ");
+        expect(body[0].password).toEqual("MyPassword01");
+        expect(body[0].preferences).toEqual(["English"]);
+      });
+  });
   test("400:responds with error when the username contains invalid characters", () => {
     return request(app)
       .patch("/api/users/b!lly*")
@@ -401,6 +418,80 @@ describe("DELETE /api/users/:username", () => {
       .expect(404)
       .then((response) => {
         expect(response.body).toEqual({ msg: "User not found" });
+      });
+  });
+});
+
+describe("POST/api/users", () => {
+  test("201:adds a user info", () => {
+    return request(app)
+      .post("/api/users")
+      .expect(201)
+      .send({ username: "Hamza", password: "MyPassword01", postcode: "M7 9EQ" })
+      .then(({ body }) => {
+        expect(body.postcode).toEqual("M7 9EQ");
+        expect(body.username).toEqual("Hamza");
+        expect(body).toEqual(
+          expect.objectContaining({
+            username: expect.any(String),
+            postcode: expect.any(String),
+            password: expect.any(String),
+          })
+        );
+      });
+  });
+  test("400:responds with error when the username contains invalid characters", () => {
+    return request(app)
+      .post("/api/users")
+      .send({
+        username: "billy*",
+        password: "MyPassword01",
+        postcode: "M7 9EQ",
+      })
+      .expect(400)
+      .then((response) => {
+        expect(response.body).toEqual({ msg: "Invalid username" });
+      });
+  });
+  test("400: responds with error when password is not a string", () => {
+    return request(app)
+      .post("/api/users")
+      .send({ username: "Hamza", password: 123, postcode: "M7 9EQ" })
+      .expect(400)
+      .then((response) => {
+        expect(response.body).toEqual({ msg: "Invalid body" });
+      });
+  });
+  test("400: responds with error when postcode is not a string", () => {
+    return request(app)
+      .post("/api/users")
+      .send({ username: "Hamza", password: "MyPassword01", postcode: 123 })
+      .expect(400)
+      .then((response) => {
+        expect(response.body).toEqual({ msg: "Invalid body" });
+      });
+  });
+
+  test("400: responds with error when parts of the body are missing", () => {
+    return request(app)
+      .post("/api/users")
+      .send({ username: "Hamza", password: "MyPassword01" })
+      .expect(400)
+      .then((response) => {
+        expect(response.body).toEqual({ msg: "Invalid key" });
+      });
+  });
+  test("400: responds with error when request key is incorrect", () => {
+    return request(app)
+      .post("/api/users")
+      .send({
+        username: "Hamza",
+        passw0rd: "MyPassword01",
+        postcode: "M7 9EQ",
+      })
+      .expect(400)
+      .then((response) => {
+        expect(response.body).toEqual({ msg: "Invalid key" });
       });
   });
 });

@@ -1,8 +1,11 @@
+const LocalStrategy = require("passport-local");
+
 const {
   fetchAllUsers,
   fetchIndividualUserByUsername,
   updateUserByUsername,
   deleteUserByUsername,
+  insertUserInfo,
 } = require("../models/userMod");
 exports.getAllUsers = (req, res, next) => {
   fetchAllUsers()
@@ -37,6 +40,16 @@ exports.patchUserByUsername = (req, res, next) => {
     });
 };
 
+exports.postUserInfo = (req, res, next) => {
+  const { username, postcode, password } = req.body;
+  insertUserInfo(username, postcode, password)
+    .then((userInfo) => {
+      res.status(201).send(userInfo);
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
 exports.deleteUserByUsername = (req, res, next) => {
   const { username } = req.params;
   deleteUserByUsername(username)
