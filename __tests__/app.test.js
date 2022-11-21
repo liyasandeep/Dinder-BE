@@ -10,7 +10,7 @@ const {
 } = require("../database/seed");
 
 const { restaurantData, usersData, preferencesData } = seedData;
-
+beforeAll(async () => await db());
 beforeEach(
   async () => await seedDataBase(restaurantData, usersData, preferencesData)
 );
