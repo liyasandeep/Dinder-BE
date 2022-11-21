@@ -21,6 +21,7 @@ if (!process.env.DATABASE_URL) {
 //
 const connectDB = async () => {
   try {
+    console.log("in connect function");
     const conn = await mongoose.connect(process.env.DATABASE_URL);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
