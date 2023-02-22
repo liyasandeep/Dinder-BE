@@ -17,9 +17,13 @@ const {
   deleteUserByUsername,
   postUserInfo,
 } = require("./controllers/userCon");
+const endpoints = require("./endpoints.json");
 app.use(cors());
 app.use(express.json());
 
+app.get("/api", (req, res) => {
+  res.status(200).send({ endpoints });
+})
 app.get("/api/restaurants", getAllRestaurants);
 app.get("/api/users", getAllUsers);
 app.get("/api/restaurants/:location", getRestaurantsByLocation);
