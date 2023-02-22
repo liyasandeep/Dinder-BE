@@ -134,17 +134,17 @@
     "description": "updates the user with the new value and responds with the updated user info",
     "queries": [],
     "exampleRequest":{
-        preferences: ["English"],
-        password: "MyPassword01",
-        postcode: "M7 9EQ",
+        "preferences": ["English"],
+        "password": "MyPassword01",
+        "postcode": "M7 9EQ",
       },
     "exampleResponse": {
       "user": [
         {
-            username: "Sol",
-            password: "MyPassword01",
-            postcode: "M7 9EQ",
-            preferences: ["English"],
+            "username": "Sol",
+            "password": "MyPassword01",
+            "postcode": "M7 9EQ",
+            "preferences": ["English"],
           }
       ]
     }
@@ -157,14 +157,14 @@
   "POST /api/users": {
     "description": "Adds a new user",
     "queries": [],
-    "exampleRequest": { username: "Hamza", password: "MyPassword01", postcode: "M7 9EQ" },
+    "exampleRequest": { "username": "Hamza", "password": "MyPassword01", "postcode": "M7 9EQ" },
     "exampleResponse": {
       "user": [
         {
-            username: "Hamza",
-            password: "MyPassword01",
-            postcode: "M7 9EQ",
-            preferences: [],
+            "username": "Hamza",
+            "password": "MyPassword01",
+            "postcode": "M7 9EQ",
+            "preferences": [],
           }
       ]
     }
