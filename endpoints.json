@@ -1,0 +1,172 @@
+{
+  "GET /api": {
+    "description": "serves up a json representation of all the available endpoints of the api"
+  },
+  "GET /api/restaurants": {
+    "description": "serves an array of all restaurants",
+    "queries": [],
+    "exampleResponse": {
+      "restaurants": [
+{
+"location": {
+"type": "Point",
+"coordinates": [
+-4.1430832636010955,
+50.3745463
+]
+},
+"name": "50 Degrees North",
+"addressLine1": "Copthorne Hotel, Armada Way, Plymouth",
+"postCode": "PL1 1AR",
+"ratingValue": 4,
+"geoLong": -4.1430832636010955,
+"geoLat": 50.3745463,
+"type": "French",
+}]
+    }
+  },
+  "GET /api/preferences": {
+    "description": "serves an array of all preferences",
+    "queries": [],
+    "exampleResponse": {
+      "preferences": [
+   
+          {
+"_id": "63827e184074de4ed6e74b60",
+"preference": "Chinese",
+"__v": 0
+}
+      ]
+    }
+  },
+  
+  "GET /api/users": {
+    "description": "serves an array of all users",
+    "queries": [],
+    "exampleResponse": {
+      "users": [
+   
+         {
+"_id": "63827e184074de4ed6e74b5a",
+"username": "Dean",
+"password": "Password3",
+"postcode": "M7 6TN",
+"preferences": [
+"italian"
+],
+"__v": 0
+},
+      ]
+    }
+  },
+    "GET /api/restaurants/:location": {
+    "description": "serves an array of restaurants in the specified location",
+    "queries": ["preferences"],
+    "exampleResponse": {
+      "restaurants": [
+   
+         {
+"location": {
+"type": "Point",
+"coordinates": [
+-4.1430832636010955,
+50.3745463
+]
+},
+"_id": "63827e184074de4ed6e74b2e",
+"name": "50 Degrees North",
+"addressLine1": "Copthorne Hotel, Armada Way, Plymouth",
+"postCode": "PL1 1AR",
+"ratingValue": 4,
+"geoLong": -4.1430832636010955,
+"geoLat": 50.3745463,
+"type": "French",
+"__v": 0
+},]
+    }
+  },
+  
+  "GET /api/restaurants/:location/:name": {
+    "description": "serves a restaurant object with the given name in the specified location",
+    "queries": [],
+    "exampleResponse": {
+      "restaurant": [
+   
+         {
+"location": {
+"type": "Point",
+"coordinates": [
+-4.1430832636010955,
+50.3745463
+]
+},
+"_id": "63827e184074de4ed6e74b2e",
+"name": "50 Degrees North",
+"addressLine1": "Copthorne Hotel, Armada Way, Plymouth",
+"postCode": "PL1 1AR",
+"ratingValue": 4,
+"geoLong": -4.1430832636010955,
+"geoLat": 50.3745463,
+"type": "French",
+"__v": 0
+}]
+    }
+  },
+  "GET /api/users/:username": {
+    "description": "serves a user object with the specified username ",
+    "queries": [],
+    "exampleResponse": {
+      "user": [
+   
+         {
+"_id": "63827e184074de4ed6e74b5a",
+"username": "Dean",
+"password": "Password3",
+"postcode": "M7 6TN",
+"preferences": [
+"italian"
+],
+"__v": 0
+}]
+    }
+  },
+  "PATCH /api/users/:username": {
+    "description": "updates the user with the new value and responds with the updated user info",
+    "queries": [],
+    "exampleRequest":{
+        preferences: ["English"],
+        password: "MyPassword01",
+        postcode: "M7 9EQ",
+      },
+    "exampleResponse": {
+      "user": [
+        {
+            username: "Sol",
+            password: "MyPassword01",
+            postcode: "M7 9EQ",
+            preferences: ["English"],
+          }
+      ]
+    }
+  },
+  
+  "DELETE /api/users/:username": {
+    "description": "deletes a user by username",
+    "queries": []
+  },
+  "POST /api/users": {
+    "description": "Adds a new user",
+    "queries": [],
+    "exampleRequest": { username: "Hamza", password: "MyPassword01", postcode: "M7 9EQ" },
+    "exampleResponse": {
+      "user": [
+        {
+            username: "Hamza",
+            password: "MyPassword01",
+            postcode: "M7 9EQ",
+            preferences: [],
+          }
+      ]
+    }
+  },
+}
