@@ -21,7 +21,7 @@
 "ratingValue": 4,
 "geoLong": -4.1430832636010955,
 "geoLat": 50.3745463,
-"type": "French",
+"type": "French"
 }]
     }
   },
@@ -136,7 +136,7 @@
     "exampleRequest":{
         "preferences": ["English"],
         "password": "MyPassword01",
-        "postcode": "M7 9EQ",
+        "postcode": "M7 9EQ"
       },
     "exampleResponse": {
       "user": [
@@ -144,7 +144,7 @@
             "username": "Sol",
             "password": "MyPassword01",
             "postcode": "M7 9EQ",
-            "preferences": ["English"],
+            "preferences": ["English"]
           }
       ]
     }
@@ -164,9 +164,9 @@
             "username": "Hamza",
             "password": "MyPassword01",
             "postcode": "M7 9EQ",
-            "preferences": [],
+            "preferences": []
           }
       ]
     }
-  },
+  }
 }
